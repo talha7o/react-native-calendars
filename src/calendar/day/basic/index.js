@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {TouchableOpacity, Text} from 'react-native';
+import React, { Component } from 'react';
+import { TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
-import {shouldUpdate} from '../../../component-updater';
+import { shouldUpdate } from '../../../component-updater';
 import Dot from '../../dot';
 import styleConstructor from './style';
 
@@ -41,7 +41,7 @@ class Day extends Component {
   }
 
   render() {
-    const {theme, disableAllTouchEventsForDisabledDays} = this.props;
+    const { theme, disableAllTouchEventsForDisabledDays } = this.props;
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
 
@@ -70,11 +70,11 @@ class Day extends Component {
       textStyle.push(this.style.selectedText);
 
       if (selectedColor) {
-        containerStyle.push({backgroundColor: selectedColor});
+        containerStyle.push({ backgroundColor: selectedColor });
       }
 
       if (selectedTextColor) {
-        textStyle.push({color: selectedTextColor});
+        textStyle.push({ color: selectedTextColor });
       }
 
     } else if (isDisabled) {
@@ -111,6 +111,7 @@ class Day extends Component {
           isToday={isToday}
           isDisabled={isDisabled}
         />
+        <Tooltip />
       </TouchableOpacity>
     );
   }
