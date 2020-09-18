@@ -80,16 +80,16 @@ const Tooltip = ({ theme, isMarked, bgColor }) => {
       content={<Text>Check this out!</Text>}
       placement="bottom"
       onClose={() => this.setState({ toolTipVisible: false })}
-    >
+    ></Tooltip>
 
-      );
-      };
+  );
+};
 
-      export default Tooltip;
+export default Tooltip;
 
 Tooltip.propTypes = {
 
-        isMarked: PropTypes.bool,
+  isMarked: PropTypes.bool,
   bgColor: PropTypes.string,
 
 };
