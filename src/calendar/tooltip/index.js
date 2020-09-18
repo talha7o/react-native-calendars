@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import styleConstructor from './style';
 import PropTypes from 'prop-types';
 import Tooltip from 'react-native-walkthrough-tooltip';
-const Tooltip = ({ theme, isMarked, bgColor }) => {
+const TooltipComp = ({ theme, isMarked, bgColor }) => {
   console.log('tooltipComponent', { theme, isMarked, bgColor })
   const style = styleConstructor(theme);
   const tooltipStyle = [style.tooltip];
@@ -85,9 +85,9 @@ const Tooltip = ({ theme, isMarked, bgColor }) => {
   );
 };
 
-export default Tooltip;
+export default TooltipComp;
 
-Tooltip.propTypes = {
+TooltipComp.propTypes = {
 
   isMarked: PropTypes.bool,
   bgColor: PropTypes.string,

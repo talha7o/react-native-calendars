@@ -3,7 +3,7 @@ import { TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { shouldUpdate } from '../../../component-updater';
 
-import Tooltip from '../../tooltip';
+import TooltipComp from '../../tooltip';
 import Dot from '../../dot';
 import styleConstructor from './style';
 
@@ -126,7 +126,7 @@ class Day extends Component {
         />
 
 
-        <Tooltip
+        <TooltipComp
           isMarked={showTooltip}
           bgColor={bgColor}
 
