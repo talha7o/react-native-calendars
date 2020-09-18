@@ -17,11 +17,9 @@ import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures'
 import { SELECT_DATE_SLOT } from '../testIDs';
 
 //Fallback for react-native-web or when RN version is < 0.44
-const { View, ViewPropTypes } = ReactNative;
+const { View, Text, ViewPropTypes } = ReactNative;
 const viewPropTypes =
-  typeof document !== 'undefined'
-    ? PropTypes.shape({ style: PropTypes.object })
-    : ViewPropTypes || View.propTypes;
+  typeof document !== 'undefined' ? PropTypes.shape({ style: PropTypes.object }) : ViewPropTypes || View.propTypes;
 const EmptyArray = [];
 
 /**
@@ -121,6 +119,7 @@ class Calendar extends Component {
     this.pressDay = this.pressDay.bind(this);
     this.longPressDay = this.longPressDay.bind(this);
     this.shouldComponentUpdate = shouldComponentUpdate;
+    console.log('main Cal', this.props)
   }
 
   updateMonth(day, doNotTriggerListeners) {
@@ -174,6 +173,7 @@ class Calendar extends Component {
   }
 
   getAccessibilityLabel = (state, day) => {
+    console.log('getAccessibilityLabel', state, day)
     const today = XDate.locales[XDate.defaultLocale].today;
     const formatAccessibilityLabel = XDate.locales[XDate.defaultLocale].formatAccessibilityLabel;
     const isToday = state === 'today';
@@ -188,6 +188,7 @@ class Calendar extends Component {
 
 
   renderDay(day, id) {
+    console.log('renderday', day, id, this.props)
     const minDate = parseDate(this.props.minDate);
     const maxDate = parseDate(this.props.maxDate);
     let state = '';
@@ -209,7 +210,6 @@ class Calendar extends Component {
     const date = day.getDate();
     const dateAsObject = xdateToData(day);
     const accessibilityLabel = this.getAccessibilityLabel(state, day);
-
     return (
       <View style={{ flex: 1, alignItems: 'center' }} key={id}>
         <DayComp
@@ -222,9 +222,13 @@ class Calendar extends Component {
           marking={this.getDateMarking(day)}
           accessibilityLabel={accessibilityLabel}
           disableAllTouchEventsForDisabledDays={this.props.disableAllTouchEventsForDisabledDays}
+          tooltipMarking={this.getTooltipDateMarking(day)}
+
         >
           {date}
+
         </DayComp>
+
       </View>
     );
   }
@@ -263,6 +267,7 @@ class Calendar extends Component {
       return this.props.dayComponent;
     }
 
+
     switch (this.props.markingType) {
       case 'period':
         return UnitDay;
@@ -281,14 +286,31 @@ class Calendar extends Component {
     if (!this.props.markedDates) {
       return false;
     }
-
     const dates = this.props.markedDates[day.toString('yyyy-MM-dd')] || EmptyArray;
     if (dates.length || dates) {
+
       return dates;
     } else {
       return false;
     }
   }
+
+  getTooltipDateMarking(day) {
+    if (!this.props.tooltip) {
+      return false;
+    }
+    const dates = this.props.tooltip[day.toString('yyyy-MM-dd')] || EmptyArray;
+    if (dates.length || dates) {
+
+      return dates;
+    } else {
+      return false;
+    }
+  }
+
+
+
+
 
   onSwipe = (gestureName) => {
     const { SWIPE_UP, SWIPE_DOWN, SWIPE_LEFT, SWIPE_RIGHT } = swipeDirections;
@@ -330,6 +352,7 @@ class Calendar extends Component {
   }
 
   renderWeek(days, id) {
+
     const week = [];
     days.forEach((day, id2) => {
       week.push(this.renderDay(day, id2));
@@ -347,7 +370,7 @@ class Calendar extends Component {
     const { firstDay, showSixWeeks, hideExtraDays, enableSwipeMonths } = this.props;
     const shouldShowSixWeeks = showSixWeeks && !hideExtraDays;
     const days = dateutils.page(currentMonth, firstDay, shouldShowSixWeeks);
-
+    // console.log('mainRender:', this.state, this.props)
     const weeks = [];
     while (days.length) {
       weeks.push(this.renderWeek(days.splice(0, 7), weeks.length));
@@ -402,6 +425,7 @@ class Calendar extends Component {
             : <CalendarHeader {...headerProps} />
           }
           <View style={this.style.monthView}>{weeks}</View>
+
         </View>
       </GestureComponent>
     );

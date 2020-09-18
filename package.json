@@ -1,56 +1,44 @@
 {
-  "name": "react-native-calendars",
-  "version": "1.22.0",
-  "main": "src/index.js",
-  "description": "React Native Calendar Components",
-  "scripts": {
-    "build": "xcodebuild -project ios/CalendarsExample.xcodeproj build",
-    "e2e": "node ./scripts/test-e2e.js --release",
-    "test": "jasmine src/*.spec.js && npm run lint && npm run e2e",
-    "lint": "eslint src/ example/src",
-    "release": "node ./scripts/release.js",
-    "start": "react-native start",
-    "ios": "react-native run-ios",
-    "android": "react-native run-android",
-    "xcode": "open ios/CalendarsExample.xcworkspace/",
-    "clean": "rm package-lock.json && rm -rf ./node_modules && npm i",
-    "pod-install": "pod install --project-directory=ios"
-  },
-  "repository": {
+  "_from": "git+https://github.com/talha7o/react-native-calendars.git",
+  "_id": "react-native-calendars@1.22.0",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/react-native-calendars",
+  "_phantomChildren": {},
+  "_requested": {
     "type": "git",
-    "url": "git+https://github.com/wix/react-native-calendars"
+    "raw": "https://github.com/talha7o/react-native-calendars",
+    "rawSpec": "https://github.com/talha7o/react-native-calendars",
+    "saveSpec": "git+https://github.com/talha7o/react-native-calendars.git",
+    "fetchSpec": "https://github.com/talha7o/react-native-calendars.git",
+    "gitCommittish": null
   },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/"
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "git+https://github.com/talha7o/react-native-calendars.git#babfeaa3d90f7ab2eb941917741137461a7952f6",
+  "_spec": "https://github.com/talha7o/react-native-calendars",
+  "_where": "/Volumes/SSD/container/baycrestcalendarapp",
+  "author": {
+    "name": "Wix.com"
   },
-  "author": "Wix.com",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wix/react-native-calendars/issues"
+  },
+  "bundleDependencies": false,
   "dependencies": {
+    "hoist-non-react-statics": "^3.3.1",
+    "immutable": "^4.0.0-rc.12",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "hoist-non-react-statics": "^3.3.1",
-    "react-native-swipe-gestures": "^1.0.5",
     "prop-types": "^15.5.10",
-    "xdate": "^0.8.0",
-    "immutable": "^4.0.0-rc.12"
+    "react-native-swipe-gestures": "^1.0.5",
+    "react-native-walkthrough-tooltip": "^1.1.11",
+    "xdate": "^0.8.0"
   },
-  "devDependencies": {
-    "babel-eslint": "^7.2.3",
-    "detox": "^16.7.2",
-    "eslint": "^6.5.1",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-react": "^7.0.0",
-    "husky": "^4.2.5",
-    "jasmine": "^2.5.2",
-    "lint-staged": "^10.2.11",
-    "mocha": "^7.1.0",
-    "prettier": "^2.0.5",
-    "react": "16.11.0",
-    "react-native": "0.62.2",
-    "react-native-navigation": "^6.7.1",
-    "semver": "5.x.x",
-    "shell-utils": "1.x.x"
-  },
+  "deprecated": false,
+  "description": "React Native Calendar Components",
   "detox": {
     "configurations": {
       "ios.sim.debug": {
@@ -72,13 +60,55 @@
     },
     "test-runner": "mocha"
   },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "detox": "^16.7.2",
+    "eslint": "^6.5.1",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-react": "^7.0.0",
+    "husky": "^4.2.5",
+    "jasmine": "^2.5.2",
+    "lint-staged": "^10.2.11",
+    "mocha": "^7.1.0",
+    "prettier": "^2.0.5",
+    "react": "16.11.0",
+    "react-native": "0.62.2",
+    "react-native-navigation": "^6.7.1",
+    "semver": "5.x.x",
+    "shell-utils": "1.x.x"
+  },
+  "homepage": "https://github.com/wix/react-native-calendars#readme",
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged"
     }
   },
+  "license": "MIT",
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md}": "prettier --write"
-  }
+  },
+  "main": "src/index.js",
+  "name": "react-native-calendars",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wix/react-native-calendars.git"
+  },
+  "scripts": {
+    "android": "react-native run-android",
+    "build": "xcodebuild -project ios/CalendarsExample.xcodeproj build",
+    "clean": "rm package-lock.json && rm -rf ./node_modules && npm i",
+    "e2e": "node ./scripts/test-e2e.js --release",
+    "ios": "react-native run-ios",
+    "lint": "eslint src/ example/src",
+    "pod-install": "pod install --project-directory=ios",
+    "release": "node ./scripts/release.js",
+    "start": "react-native start",
+    "test": "jasmine src/*.spec.js && npm run lint && npm run e2e",
+    "xcode": "open ios/CalendarsExample.xcworkspace/"
+  },
+  "version": "1.22.0"
 }

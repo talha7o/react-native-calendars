@@ -1,96 +1,95 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import styleConstructor from './style';
 import PropTypes from 'prop-types';
-
-const Tooltip = ({ theme, isMarked, isDisabled, dotColor, isToday, isSelected }) => {
-
+import Tooltip from 'react-native-walkthrough-tooltip';
+const Tooltip = ({ theme, isMarked, bgColor }) => {
+  console.log('tooltipComponent', { theme, isMarked, bgColor })
   const style = styleConstructor(theme);
-  const dotStyle = [style.dot];
+  const tooltipStyle = [style.tooltip];
 
-  if (isMarked) {
-    dotStyle.push(style.visibleTooltip);
+  // function tooltipView() {
+  //   return (<View
+  //     style={{
+  //       justifyContent: 'center',
+  //       alignItems: 'center',
+  //       marginLeft: 10,
+  //       height: 80,
+  //       marginTop: 25,
+  //       flexDirection: 'row',
+  //       flexWrap: 'wrap',
+  //       backgroundColor: 'transparent',
+  //       marginRight: 10,
+  //       marginTop: 13,
+  //       zIndex: 99999
+  //     }}
+  //   >
+  //     <View
+  //       style={[
+  //         {
+  //           height: 40,
+  //           borderRadius: 3,
+  //           justifyContent: 'center',
+  //           alignItems: 'center',
+  //           backgroundColor: '#0393EA',
+  //           flexDirection: 'row',
+  //           paddingLeft: 10,
+  //           paddingRight: 10
+  //         }
+  //       ]}
+  //     >
+  //       <Text style={{ fontSize: 18, color: '#fff', paddingLeft: 2 }}>
+  //         Press
+  //               </Text>
+  //     </View>
+  //     <View
+  //       style={{
+  //         justifyContent: 'center',
+  //         alignItems: 'center',
+  //         borderRightColor: '#0393EA',
+  //         position: 'absolute',
+  //         left: 0,
+  //         top: 12,
+  //         transform: [{ rotate: '90deg' }],
+  //         width: 20,
+  //         height: 10,
+  //         borderTopColor: 'transparent',
+  //         borderTopWidth: 10,
+  //         borderRightWidth: 18,
+  //         borderBottomWidth: 10,
+  //         borderBottomColor: 'transparent'
+  //       }} />
+  //   </View>
+  //   )
+  // }
 
-    if (isToday) {
-      dotStyle.push(style.visibleTooltip);
-    }
+  if (isMarked == true) {
+    // tooltipStyle.push(style.visibleTooltip);
+    console.log('marked True', isMarked)
 
-    if (isDisabled) {
-      dotStyle.push(style.disabledDot);
-    }
 
-    if (isSelected) {
-      dotStyle.push(style.selectedDot);
-    }
-
-    if (dotColor) {
-      dotStyle.push({ backgroundColor: dotColor });
+    if (bgColor) {
+      tooltipStyle.push({ backgroundColor: bgColor });
     }
   }
 
   return (
 
-    <View
-      style={{
-        justifyContent: 'center',
-        alignItems: 'center',
-        marginLeft: 10,
-        height: 80,
-        marginTop: -25,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        backgroundColor: 'transparent',
-        marginRight: 10,
-        marginTop: 13
-      }}
+    <Tooltip
+      isVisible={isMarked}
+      content={<Text>Check this out!</Text>}
+      placement="bottom"
+      onClose={() => this.setState({ toolTipVisible: false })}
     >
-      <View
-        style={[
-          {
-            height: 40,
-            borderRadius: 3,
-            justifyContent: 'center',
-            alignItems: 'center',
-            backgroundColor: '#0393EA',
-            flexDirection: 'row',
-            paddingLeft: 10,
-            paddingRight: 10
-          }
-        ]}
-      >
-        <Text style={{ fontSize: 18, color: '#fff', paddingLeft: 2 }}>
-          Press
-                </Text>
-      </View>
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-          borderRightColor: '#0393EA',
-          position: 'absolute',
-          left: 165,
-          top: -12,
-          transform: [{ rotate: '90deg' }],
-          width: 20,
-          height: 10,
-          borderTopColor: 'transparent',
-          borderTopWidth: 10,
-          borderRightWidth: 18,
-          borderBottomWidth: 10,
-          borderBottomColor: 'transparent'
-        }} />
-    </View>
 
-  );
-};
+      );
+      };
 
-export default Tooltip;
+      export default Tooltip;
 
-Dot.propTypes = {
-  theme: PropTypes.object,
-  isMarked: PropTypes.bool,
-  dotColor: PropTypes.string,
-  isSelected: PropTypes.bool,
-  isToday: PropTypes.bool,
-  isDisabled: PropTypes.bool
+Tooltip.propTypes = {
+
+        isMarked: PropTypes.bool,
+  bgColor: PropTypes.string,
+
 };

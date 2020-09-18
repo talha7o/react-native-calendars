@@ -1,10 +1,10 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 import styleConstructor from './style';
 import PropTypes from 'prop-types';
 
-const Dot = ({theme, isMarked, isDisabled, dotColor, isToday, isSelected}) => {
-
+const Dot = ({ theme, isMarked, isDisabled, dotColor, isToday, isSelected }, { tooltip }) => {
+  // console.log('dot: ', { theme, isMarked, isDisabled, dotColor, isToday, isSelected, tooltip })
   const style = styleConstructor(theme);
   const dotStyle = [style.dot];
 
@@ -13,6 +13,7 @@ const Dot = ({theme, isMarked, isDisabled, dotColor, isToday, isSelected}) => {
 
     if (isToday) {
       dotStyle.push(style.todayDot);
+
     }
 
     if (isDisabled) {
@@ -24,12 +25,12 @@ const Dot = ({theme, isMarked, isDisabled, dotColor, isToday, isSelected}) => {
     }
 
     if (dotColor) {
-      dotStyle.push({backgroundColor: dotColor});
+      dotStyle.push({ backgroundColor: dotColor });
     }
   }
 
   return (
-    <View style={dotStyle}/>
+    <View style={dotStyle} />
   );
 };
 

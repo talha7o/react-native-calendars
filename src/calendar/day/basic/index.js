@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { TouchableOpacity, Text } from 'react-native';
 import PropTypes from 'prop-types';
 import { shouldUpdate } from '../../../component-updater';
+
+import Tooltip from '../../tooltip';
 import Dot from '../../dot';
 import styleConstructor from './style';
 
@@ -18,15 +20,17 @@ class Day extends Component {
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
     date: PropTypes.object,
+    tooltip: PropTypes.object,
     disableAllTouchEventsForDisabledDays: PropTypes.bool
   };
 
   constructor(props) {
     super(props);
     this.style = styleConstructor(props.theme);
-
+    // console.log('Day props :', this.props)
     this.onDayPress = this.onDayPress.bind(this);
     this.onDayLongPress = this.onDayLongPress.bind(this);
+
   }
 
   onDayPress() {
@@ -37,14 +41,13 @@ class Day extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    return shouldUpdate(this.props, nextProps, ['state', 'children', 'marking', 'onPress', 'onLongPress']);
+    return shouldUpdate(this.props, nextProps, ['state', 'children', 'marking', 'tooltipMarking', 'onPress', 'onLongPress']);
   }
 
   render() {
     const { theme, disableAllTouchEventsForDisabledDays } = this.props;
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
-
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
       marking = {
@@ -52,9 +55,15 @@ class Day extends Component {
       };
     }
 
+    let tooltipMarking = this.props.tooltipMarking || {};
+    if (tooltipMarking && tooltipMarking.constructor === Array && tooltipMarking.length) {
+      tooltipMarking = {
+        tooltipMarking: true
+      };
+    }
+
     const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
     const isToday = this.props.state === 'today';
-
     const {
       marked,
       dotColor,
@@ -64,6 +73,10 @@ class Day extends Component {
       activeOpacity,
       disableTouchEvent
     } = marking;
+    const {
+      showTooltip,
+      bgColor
+    } = tooltipMarking;
 
     if (selected) {
       containerStyle.push(this.style.selected);
@@ -111,7 +124,14 @@ class Day extends Component {
           isToday={isToday}
           isDisabled={isDisabled}
         />
-        <Tooltip />
+
+
+        <Tooltip
+          isMarked={showTooltip}
+          bgColor={bgColor}
+
+        />
+
       </TouchableOpacity>
     );
   }
