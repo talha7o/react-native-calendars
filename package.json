@@ -1,5 +1,5 @@
 {
-  "_from": "git+https://github.com/talha7o/react-native-calendars.git",
+  "_from": "git+https://github.com/talha7o/react-native-calendars.git#react-native-calendars-247labs",
   "_id": "react-native-calendars@1.22.0",
   "_inBundle": false,
   "_integrity": "",
@@ -7,18 +7,18 @@
   "_phantomChildren": {},
   "_requested": {
     "type": "git",
-    "raw": "https://github.com/talha7o/react-native-calendars",
-    "rawSpec": "https://github.com/talha7o/react-native-calendars",
-    "saveSpec": "git+https://github.com/talha7o/react-native-calendars.git",
+    "raw": "https://github.com/talha7o/react-native-calendars#react-native-calendars-247labs",
+    "rawSpec": "https://github.com/talha7o/react-native-calendars#react-native-calendars-247labs",
+    "saveSpec": "git+https://github.com/talha7o/react-native-calendars.git#react-native-calendars-247labs",
     "fetchSpec": "https://github.com/talha7o/react-native-calendars.git",
-    "gitCommittish": null
+    "gitCommittish": "react-native-calendars-247labs"
   },
   "_requiredBy": [
     "#USER",
     "/"
   ],
-  "_resolved": "git+https://github.com/talha7o/react-native-calendars.git#babfeaa3d90f7ab2eb941917741137461a7952f6",
-  "_spec": "https://github.com/talha7o/react-native-calendars",
+  "_resolved": "git+https://github.com/talha7o/react-native-calendars.git#55107c89ae233a6585de5dfa0cd30be19f7b2fc1",
+  "_spec": "https://github.com/talha7o/react-native-calendars#react-native-calendars-247labs",
   "_where": "/Volumes/SSD/container/baycrestcalendarapp",
   "author": {
     "name": "Wix.com"
@@ -33,7 +33,9 @@
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "prop-types": "^15.5.10",
+    "react-native-guide-tips": "0.0.15",
     "react-native-swipe-gestures": "^1.0.5",
+    "react-native-tooltips": "^1.0.2",
     "react-native-walkthrough-tooltip": "^1.1.11",
     "xdate": "^0.8.0"
   },

@@ -13,6 +13,7 @@ import MultiPeriodDay from './day/multi-period';
 import SingleDay from './day/custom';
 import CalendarHeader from './header';
 import shouldComponentUpdate from './updater';
+import Tips from 'react-native-guide-tips'
 import GestureRecognizer, { swipeDirections } from 'react-native-swipe-gestures';
 import { SELECT_DATE_SLOT } from '../testIDs';
 
@@ -112,14 +113,15 @@ class Calendar extends Component {
 
     this.style = styleConstructor(this.props.theme);
     this.state = {
-      currentMonth: props.current ? parseDate(props.current) : XDate()
+      currentMonth: props.current ? parseDate(props.current) : XDate(),
+      showTip: null
     };
 
     this.updateMonth = this.updateMonth.bind(this);
     this.pressDay = this.pressDay.bind(this);
     this.longPressDay = this.longPressDay.bind(this);
     this.shouldComponentUpdate = shouldComponentUpdate;
-    console.log('main Cal', this.props)
+    console.log('main Cal', this.props, this.state)
   }
 
   updateMonth(day, doNotTriggerListeners) {
@@ -187,8 +189,13 @@ class Calendar extends Component {
   }
 
 
+
+
   renderDay(day, id) {
-    console.log('renderday', day, id, this.props)
+    console.log('renderday', day, id, this.props, this.state.showTip, this.getTooltipDateMarking(day).showTooltip)
+
+
+
     const minDate = parseDate(this.props.minDate);
     const maxDate = parseDate(this.props.maxDate);
     let state = '';
@@ -201,7 +208,6 @@ class Calendar extends Component {
     } else if (dateutils.sameDate(day, XDate())) {
       state = 'today';
     }
-
     if (!dateutils.sameMonth(day, this.state.currentMonth) && this.props.hideExtraDays) {
       return (<View key={id} style={{ flex: 1 }} />);
     }
@@ -210,26 +216,36 @@ class Calendar extends Component {
     const date = day.getDate();
     const dateAsObject = xdateToData(day);
     const accessibilityLabel = this.getAccessibilityLabel(state, day);
+    let tippy = !!this.getTooltipDateMarking(day).showTooltip ? true : false
+
     return (
       <View style={{ flex: 1, alignItems: 'center' }} key={id}>
-        <DayComp
-          testID={`${SELECT_DATE_SLOT}-${dateAsObject.dateString}`}
-          state={state}
-          theme={this.props.theme}
-          onPress={this.pressDay}
-          onLongPress={this.longPressDay}
-          date={dateAsObject}
-          marking={this.getDateMarking(day)}
-          accessibilityLabel={accessibilityLabel}
-          disableAllTouchEventsForDisabledDays={this.props.disableAllTouchEventsForDisabledDays}
-          tooltipMarking={this.getTooltipDateMarking(day)}
-
+        <Tips
+          visible={tippy}
+          text="Press here"
+          style={{ backgroundColor: '#002C55', width: 90 }}
+        // onRequestClose={this.handleTip}
         >
-          {date}
+          <DayComp
+            testID={`${SELECT_DATE_SLOT}-${dateAsObject.dateString}`}
+            state={state}
+            theme={this.props.theme}
+            onPress={this.pressDay}
+            onLongPress={this.longPressDay}
+            date={dateAsObject}
+            marking={this.getDateMarking(day)}
+            accessibilityLabel={accessibilityLabel}
+            disableAllTouchEventsForDisabledDays={this.props.disableAllTouchEventsForDisabledDays}
+            tooltipMarking={this.getTooltipDateMarking(day).showTooltip}
 
-        </DayComp>
+          >
+            {date}
 
-      </View>
+          </DayComp>
+
+
+        </Tips>
+      </View >
     );
   }
 

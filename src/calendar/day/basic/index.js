@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, Text } from 'react-native';
+import { TouchableOpacity, View, Text, TouchableHighlight } from 'react-native';
+
+
 import PropTypes from 'prop-types';
 import { shouldUpdate } from '../../../component-updater';
-
+import Tooltip from 'react-native-walkthrough-tooltip';
 import TooltipComp from '../../tooltip';
 import Dot from '../../dot';
 import styleConstructor from './style';
-
+import RNTooltips from 'react-native-tooltips';
 
 class Day extends Component {
   static displayName = 'IGNORE';
@@ -103,7 +105,7 @@ class Day extends Component {
     } else if (typeof disableAllTouchEventsForDisabledDays === 'boolean' && isDisabled) {
       shouldDisableTouchEvent = disableAllTouchEventsForDisabledDays;
     }
-
+    // console.log('basic day', this.props, this.state)
     return (
       <TouchableOpacity
         testID={this.props.testID}
@@ -115,6 +117,11 @@ class Day extends Component {
         accessibilityRole={isDisabled ? undefined : 'button'}
         accessibilityLabel={this.props.accessibilityLabel}
       >
+
+        {/* What should be the parent? */}
+
+        {/* <RNTooltips text={"Long Press Description"} visible={showTooltip} target={this.props.children} parent={} /> */}
+
         <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
         <Dot
           theme={theme}
@@ -125,12 +132,18 @@ class Day extends Component {
           isDisabled={isDisabled}
         />
 
+        {/* <Tooltip
+          isVisible={showTooltip}
+          content={<Text> Press here</Text>}
 
-        <TooltipComp
-          isMarked={showTooltip}
-          bgColor={bgColor}
+          placement="top"
+          onClose={() => this.setState({ toolTipVisible: false })}
+        >
+          <TouchableHighlight >
+            <Text> </Text>
+          </TouchableHighlight>
+        </Tooltip> */}
 
-        />
 
       </TouchableOpacity>
     );
